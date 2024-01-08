@@ -3,3 +3,5 @@ uvicorn
 pandas
 sqlalchemy
 scikit-learn
+pyarrow
+fastparquet
