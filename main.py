@@ -5,12 +5,13 @@ from ml_model import recommend_game
 app = FastAPI()
 
 def playtime_genre(genre: str):
+    '''should return the year with the most hours played for a specified genre.'''
+
     df_combined = pd.read_parquet('./data/processed/playtime_genre_combined.parquet')
     genre_lower = genre.lower()
 
     # Find the corresponding column for the genre
     genre_column = next((col for col in df_combined.columns if col.lower() == genre_lower), None)
-
     if not genre_column:
         return {"error": f"Genre '{genre}' not found"}
     genre_df = df_combined[df_combined[genre_column] == 1]
@@ -19,9 +20,9 @@ def playtime_genre(genre: str):
     return {"Year with most hours played for Genre {}".format(genre): int(max_playtime_year)}
 
 def user_for_genre(genre: str):
-    # Load the combined dataset
-    df_combined = pd.read_parquet('./data/processed/user_genre_combined.parquet')
+    '''Finds the top user and their yearly playtime for a specific genre'''
 
+    df_combined = pd.read_parquet('./data/processed/user_genre_combined.parquet')
     genre_lower = genre.lower()
     genre_column = next((col for col in df_combined.columns if col.lower() == genre_lower), None)
     if not genre_column:
@@ -39,6 +40,8 @@ def user_for_genre(genre: str):
     }
 
 def users_recommend(year: int):
+    '''returns the top 3 games MOST recommended by users for the given year.'''
+
     df_combined_reviews = pd.read_parquet('./data/processed/games_reviews_combined.parquet')
     year_games = df_combined_reviews[df_combined_reviews['release_year'] == year]
     if year_games.empty:
@@ -53,6 +56,8 @@ def users_recommend(year: int):
 
 
 def users_worst_developer(year: int):
+    '''returns the top 3 developers with the LEAST recommended games by users for the given year '''
+
     df_combined_reviews_developer = pd.read_parquet('./data/processed/games_reviews_developer_combined.parquet')
     year_games = df_combined_reviews_developer[df_combined_reviews_developer['release_year'] == year]
     if year_games.empty:
@@ -68,6 +73,9 @@ def users_worst_developer(year: int):
 
 
 def sentiment_analysis(developer: str):
+    '''returns a dictionary where the developer's name is the key, and the value is a list containing 
+    the total number of records of user reviews categorized with sentiment analysis.'''
+    
     df_combined_sentiment = pd.read_parquet('./data/processed/games_sentiment_combined.parquet')
     developer_lower = developer.lower()
     matched_developer = df_combined_sentiment['developer'].str.lower().eq(developer_lower)
@@ -81,8 +89,6 @@ def sentiment_analysis(developer: str):
     return {"Sentiment analysis for developer {}".format(developer): sentiment_count.to_dict()}
 
 
-
-# Endpoint definitions for FastAPI
 @app.get("/PlayTimeGenre/{genre}")
 def endpoint_playtime_genre(genre: str):
     return playtime_genre(genre)
@@ -104,9 +110,9 @@ def endpoint_sentiment_analysis(developer: str):
     return sentiment_analysis(developer)
 
 @app.get("/game_recommendations/{game_id}")
-def game_recommendations(game_id: int):  # Changed type to int
+def game_recommendations(game_id: int):  
     try:
-        recommendations = recommend_game(game_id)  # Ensure this is the correct function name
+        recommendations = recommend_game(game_id)  
         return {"recommendations": recommendations}
     except Exception as e:
         return {"error": str(e)}
