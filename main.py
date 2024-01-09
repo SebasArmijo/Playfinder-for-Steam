@@ -110,3 +110,7 @@ def game_recommendations(game_id: int):  # Changed type to int
         return {"recommendations": recommendations}
     except Exception as e:
         return {"error": str(e)}
+    
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to my FastAPI application!"}
