@@ -6,7 +6,7 @@ import numpy as np
 
 def recommend_game(game_id, top_n=5):
     # Load the preprocessed 50% sampled dataset
-    df_sampled = pd.read_parquet('./data/processed/preprocessed_50percent_sample_for_recommendation.parquet')
+    df_sampled = pd.read_parquet('./data/processed/preprocessed_sample_for_recommendation.parquet')
 
     # Reset index to align with the similarity matrix
     df_sampled = df_sampled.reset_index(drop=True)
