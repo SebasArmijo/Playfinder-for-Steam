@@ -44,7 +44,7 @@ The FastAPI framework was used to craft an API offering specific endpoints:
 - `UsersRecommend(year: int)`: Lists the top three user-recommended games for a particular year.
 - `UsersNotRecommend(year: int)`: Highlights the top three games with the least recommendations for a specific year.
 - `sentiment_analysis(year: int)`: Analyzes user review sentiments based on the game's release year.
-Machine Learning Endpoint:
+  ### Machine Learning Endpoint:
 - `recommend_game(game_id, top_n=5)`: Takes a product ID as input and should return a list of 5 recommended games that are similar to the input game
 
 
