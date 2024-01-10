@@ -58,5 +58,5 @@ A machine learning model was developed, focusing on game-to-game (item-to-item) 
 - [Notebooks](https://github.com/SebasArmijo/Playfinder-for-Steam/tree/master/notebooks): Make sure you unzip the data in th eprocessed folder if you want to follow the step by step.
 - [Data](https://github.com/SebasArmijo/Playfinder-for-Steam/tree/master/data): Data used in our project.
 - [Link to API](https://playfinder-for-steam.onrender.com/docs): Note that the datasets used were only samples of the originals since render has limited memory to work with.
-- [Link to Youtube Video](https://playfinder-for-steam.onrender.com/docs)
+- [Link to Youtube Video](https://youtu.be/vYkDlZO0wgA): English Version to be released in the future
 
