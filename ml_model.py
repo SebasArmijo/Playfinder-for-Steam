@@ -5,6 +5,9 @@ import numpy as np
 
 
 def recommend_game(game_id, top_n=5):
+    '''takes a product ID as input and should return a list of 5 
+    recommended games that are similar to the input game. '''
+
     df_sampled = pd.read_parquet('./data/processed/preprocessed_sample_for_recommendation.parquet')
     df_sampled = df_sampled.reset_index(drop=True)
 
